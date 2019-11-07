@@ -23,7 +23,7 @@ namespace ZoomUsTests.Controllers
 			return epoch;
 		}
 
-		public static string GenerateToken(string apiKey, string apiSecret, string meetingNumber, string ts, string role)
+		public static string GenerateToken(string apiKey, string apiSecret, int meetingNumber, string ts, int role)
 		{
 			string message = String.Format("{0}{1}{2}{3}", apiKey, meetingNumber, ts, role);
 			apiSecret = apiSecret ?? "";
@@ -55,34 +55,34 @@ namespace ZoomUsTests.Controllers
 				ZoomApiSecret = "TODO - SET THIS"
 			};
 
-			if (string.IsNullOrWhiteSpace(request.MeetingNumber))
-			{
-				var client = new ZoomClient(options);
-				var allUsers = client.Users.GetUsers(UserStatuses.Active, 30, 1);
+			//if (string.IsNullOrWhiteSpace(request.MeetingNumber))
+			//{
+			//	var client = new ZoomClient(options);
+			//	var allUsers = client.Users.GetUsers(UserStatuses.Active, 30, 1);
 
-				var user = allUsers.Users.Single(u => u.Email == "TODO - SET THIS");
+			//	var user = allUsers.Users.Single(u => u.Email == "kull2222@gmail.com");
 
-				output.Messages.Add("Found User: " + user.Id + " (" + user.FirstName + " " + user.LastName + ") - " + user.Email);
+			//	output.Messages.Add("Found User: " + user.Id + " (" + user.FirstName + " " + user.LastName + ") - " + user.Email);
 
-				var meeting = client.Meetings.CreateMeeting(user.Id, new AndcultureCode.ZoomClient.Models.Meetings.Meeting()
-				{
-					Topic = "string",
-					Type = AndcultureCode.ZoomClient.Models.Meetings.MeetingTypes.Scheduled,
-					StartTime = DateTime.Now,
-					Duration = 30,
-					Timezone = "America/Los_Angeles",
-					Password = "",
-					Agenda = "What is an agenda?",
-					Recurrence = null,
-					Settings = new AndcultureCode.ZoomClient.Models.Meetings.MeetingSettings() { EnableJoinBeforeHost = true }
-				});
+			//	var meeting = client.Meetings.CreateMeeting(user.Id, new AndcultureCode.ZoomClient.Models.Meetings.Meeting()
+			//	{
+			//		Topic = "string",
+			//		Type = AndcultureCode.ZoomClient.Models.Meetings.MeetingTypes.Scheduled,
+			//		StartTime = DateTime.Now,
+			//		Duration = 30,
+			//		Timezone = "America/Los_Angeles",
+			//		Password = "",
+			//		Agenda = "What is an agenda?",
+			//		Recurrence = null,
+			//		Settings = new AndcultureCode.ZoomClient.Models.Meetings.MeetingSettings() { EnableJoinBeforeHost = true }
+			//	});
 
-				request.MeetingNumber = meeting.Id;
-			}
+			//	request.MeetingNumber = meeting.Id;
+			//}
 
-			string meetingNumber = request.MeetingNumber;
+			int meetingNumber = request.MeetingNumber;
 			string ts = ToTimestamp(DateTime.UtcNow.ToUniversalTime()).ToString();
-			string role = "0";
+			int role = request.Role;
 			string token = GenerateToken(options.ZoomApiKey, options.ZoomApiSecret, meetingNumber, ts, role);
 
 			output.ZoomToken = token;
@@ -99,7 +99,9 @@ namespace ZoomUsTests.Controllers
 		[FromQuery]
 		public string ApiKey { get; set; }
 		[FromQuery]
-		public string MeetingNumber { get; set; }
+		public int Role { get; set; }
+		[FromQuery]
+		public int MeetingNumber { get; set; }
 		[FromQuery]
 		public string UserName { get; set; }
 		[FromQuery]
@@ -111,7 +113,7 @@ namespace ZoomUsTests.Controllers
 	{
 		public List<string> Messages { get; set; }
 		public string ZoomToken { get; set; }
-		public string MeetingNumber { get; set; }
+		public int MeetingNumber { get; set; }
 		public string ApiSecret { get; set; }
 		public string ApiKey { get; set; }
 	}

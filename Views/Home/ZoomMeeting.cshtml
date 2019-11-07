@@ -31,7 +31,7 @@
 
        var StartMeeting = function () {
             var meetConfig = {
-                MeetingNumber: "",// "@ViewBag.MeetingNumber", //parseInt(document.getElementById('meeting_number').value),
+                MeetingNumber: 358560270,// "@ViewBag.MeetingNumber", //parseInt(document.getElementById('meeting_number').value),
                 UserName: "daniel", //  document.getElementById('display_name').value
                 PassWord: "",
                 LeaveUrl: "https://zoom.us",
@@ -63,7 +63,7 @@
                             {
                                 meetingNumber: data.meetingNumber, // meetConfig.MeetingNumber,
                                 userName: meetConfig.UserName,
-                                signature: data.zoomToken,
+                                signature: data.zoomToken, // signature
                                 apiKey: data.apiKey,
                                 userEmail: 'kull2222@gmail.com',
                                 passWord: meetConfig.passWord,
