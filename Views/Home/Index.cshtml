@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Meeting number is :  @ViewBag.MeetingNumber</p>
+    <div>
+
+    </div>
+    <iframe style="min-height: 600px; min-width: 800px; max-height: 600px; max-width: 800px;" src='@(Url.Action("ZoomMeeting", "Home") + '/' + ViewBag.MeetingNumber)'></iframe>
+</div>
+
+
+@section Scripts{
+
+
+    <script>
+    $(function() {
+        console.log('the meeting number is: ' + '@ViewBag.MeetingNumber');
+  
+    });
+    </script>
+}
