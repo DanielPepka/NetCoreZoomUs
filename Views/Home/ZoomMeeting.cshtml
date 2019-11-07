@@ -2,14 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<script src="https://source.zoom.us/1.6.0/lib/vendor/react.min.js"></script>
-<script src="https://source.zoom.us/1.6.0/lib/vendor/react-dom.min.js"></script>
-<script src="https://source.zoom.us/1.6.0/lib/vendor/redux.min.js"></script>
-<script src="https://source.zoom.us/1.6.0/lib/vendor/redux-thunk.min.js"></script>
-<script src="https://source.zoom.us/1.6.0/lib/vendor/jquery.min.js"></script>
-<script src="https://source.zoom.us/1.6.0/lib/vendor/lodash.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/react.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/react-dom.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/redux.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/redux-thunk.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/jquery.min.js"></script>
+<script src="https://source.zoom.us/1.6.1/lib/vendor/lodash.min.js"></script>
 
-<script src="https://source.zoom.us/zoom-meeting-1.6.0.min.js"></script>
+<script src="https://source.zoom.us/zoom-meeting-1.6.1.min.js"></script>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
@@ -20,14 +20,14 @@
 
     <script>
 
-    window.rootUrl = "@Url.Action("Index", "Home", null, "https")";
+        window.rootUrl = "@Url.Action("Index", "Home", null, "https")";
 
     $(function() {
        console.log('the meeting number is: ' + '@ViewBag.MeetingNumber');
        console.log(JSON.stringify(ZoomMtg.checkSystemRequirements()));
 
-      ZoomMtg.preLoadWasm();
-      ZoomMtg.prepareJssdk();
+        ZoomMtg.preLoadWasm();
+        ZoomMtg.prepareJssdk();
 
        var StartMeeting = function () {
             var meetConfig = {
